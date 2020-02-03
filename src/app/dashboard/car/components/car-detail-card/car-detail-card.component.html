@@ -1,0 +1,85 @@
+<div *ngIf="(car$ | widthLoading | async) as obs">
+  <div
+    *ngIf="obs.error"
+    fxLayout="row"
+    fxLayoutAlign="center"
+    class="error"
+  >
+    <mat-error>Si è verificato un errore, riprova in pochi minuti!</mat-error>
+  </div>
+  <ng-container *ngIf="!obs.value && !obs.loading">
+    <div fxLayout="row" xLayout.xs="column" fxLayoutAlign="center start">
+      <div fxFlex="200px" class="mat-typography">
+        <h2>Aggiungi la tua auto</h2>
+      </div>
+      <div fxFlex="100px">
+        <button mat-fab color="accent" (click)="onCarAdd()">+</button>
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center" class="add-padding mat-typography">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Nessuna auto inserita</mat-card-title>
+        </mat-card-header>
+        <img
+          mat-card-image
+          src="https://www.mercedes-benz.it/passengercars/_jcr_content/image.MQ6.2.2x.20190123105639.png"
+          alt="mercedes"
+        />
+      </mat-card>
+    </div>
+  </ng-container>
+  <div
+    *ngIf="obs.value && !obs.error"
+    fxLayout="row"
+    fxLayoutAlign="center"
+    class="cars-container"
+  >
+    <ng-container>
+      <div fxFlex="28%" fxFlex.xs="80%" fxFlex.md="40%" fxFlex.sm="50%" class="card">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>{{ obs.value?.casa }}</mat-card-title>
+            <mat-card-subtitle>{{ obs.value?.modello }}</mat-card-subtitle>
+          </mat-card-header>
+          <img
+            mat-card-image
+            src="https://www.mercedes-benz.it/passengercars/_jcr_content/image.MQ6.2.2x.20190123105639.png"
+            alt="mercedes"
+          />
+          <mat-card-content>
+            <section class="mat-typography">
+              <h3>Targa: {{ obs.value?.targa }}</h3>
+              <h3>Anno: {{ obs.value?.anno }}</h3>
+              <mat-divider></mat-divider>
+            </section>
+          </mat-card-content>
+          <mat-card-actions>
+            <div flexLayout="row" fxLayoutAlign="space-between">
+              <app-submit-button
+                color="accent"
+                (click)="onCarUpdate(obs.value)"
+              >
+                MODIFICA
+              </app-submit-button>
+              <app-submit-button
+                color="warn"
+                (click)="onCarDelete()"
+              >
+                ELIMINA
+              </app-submit-button>
+            </div>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </ng-container>
+  </div>
+  <div
+    *ngIf="obs.loading"
+    fxLayout="row"
+    fxLayoutAlign="center"
+    class="add-padding"
+  >
+    <app-spinner></app-spinner>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+.calendar-wrapper{
+  max-width: 350px;
+  min-width: 250px;
+  text-align: center;
+}
+
+.cell-color-start {
+  background: orange;
+ border-radius: 100%;
+ z-index: 10;
+}
+
+.mat-calendar-body-today:not(.mat-calendar-body-selected) {
+  border: none;
+}

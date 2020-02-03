@@ -1,0 +1,56 @@
+<app-form-dialog
+  [headerText]="
+    data.editMode ? 'Modifica i tuoi dati' : 'Inserisci i tuoi dati'
+  "
+>
+<div class="icon-close" (click)="onDialogClose()">
+    <mat-icon>close</mat-icon>
+  </div>
+  <form [formGroup]="carService.form" (ngSubmit)="onSubmit()">
+    <mat-grid-list cols="1" rowHeight="400px">
+      <mat-grid-tile>
+        <div class="controls-container">
+          <mat-form-field>
+            <mat-select
+              placeholder="Casa automobilistica*"
+              formControlName="casa"
+            >
+              <ng-container *ngFor="let man of manufacterer">
+                <mat-option value="{{ man }}">{{ man }}</mat-option>
+              </ng-container>
+            </mat-select>
+            <mat-error>Campo obbligatorio</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="Modello*" formControlName="modello">
+              <ng-container *ngFor="let model of carModel">
+                <mat-option value="{{ model }}">{{ model }}</mat-option>
+              </ng-container>
+            </mat-select>
+            <mat-error>Campo obbligatorio</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Targa*" formControlName="targa" />
+            <mat-error>Campo obbligatorio</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="Anno di fabbrica*" formControlName="anno">
+              <ng-container *ngFor="let year of carsYear">
+                <mat-option value="{{ year }}">{{ year }}</mat-option>
+              </ng-container>
+            </mat-select>
+            <mat-error>Campo obbligatorio</mat-error>
+          </mat-form-field>
+          <div class="button-row">
+            <app-raised-btn  class="form-btn" color="accent" (click)="onCancel()">
+              Cancella
+            </app-raised-btn>
+            <app-submit-button [disabled]="carService.form.invalid" color="primary">
+                Conferma
+            </app-submit-button>
+          </div>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </form>
+</app-form-dialog>

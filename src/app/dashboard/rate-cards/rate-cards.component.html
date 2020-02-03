@@ -1,0 +1,108 @@
+<app-feature-header title="Tariffari"></app-feature-header>
+<app-feature-actions
+  [selectOptions]="rateNames"
+  (newTableCreate)="onNewTarifCreate()"
+  (optSelected)="onRateSelect($event)"
+  [selectPlaceholder]="'Seleziona un tariffario'"
+  [actBtnText]="'Crea un nuovo tariffario'"
+></app-feature-actions>
+<app-error-msg [errorMsg]="error"></app-error-msg>
+<form [formGroup]="rateService.tableForm" (ngSubmit)="onRateSave()">
+  <!-- table -->
+  <div class="mat-elevation-z8 table-container">
+    <mat-table [dataSource]="dataSource" formArrayName="rows">
+      <ng-container *matHeaderRowDef="displayedColumns">
+        <div
+          class="mat-header-row header-group-row"
+          [ngClass]="{ hide: dataSource != null }"
+        >
+          <div class="mat-header-cell header-group">
+            Crea o seleziona un Tariffario salvato
+          </div>
+        </div>
+        <div class="mat-typography table-title">
+          <h2>{{ tableName }}</h2>
+        </div>
+        <mat-header-row></mat-header-row>
+      </ng-container>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      <!-- Km Column -->
+      <ng-container matColumnDef="km">
+        <mat-header-cell *matHeaderCellDef>Km percorsi</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.km }} </mat-cell>
+      </ng-container>
+      <!-- Euro Column -->
+      <ng-container matColumnDef="euro">
+        <mat-header-cell *matHeaderCellDef>Euro</mat-header-cell>
+        <mat-cell
+          *matCellDef="let element; let i = index"
+          formGroupName="{{ i }}"
+          ><mat-form-field class="euro-input">
+            <input
+              matInput
+              type="number"
+              min="0"
+              value="{{ element.euro }}"
+              formControlName="euro"
+            /> </mat-form-field
+        ></mat-cell>
+      </ng-container>
+      <!-- Active Column -->
+      <ng-container matColumnDef="active">
+        <mat-header-cell *matHeaderCellDef>Attivo / Non Attivo</mat-header-cell>
+        <mat-cell
+          *matCellDef="let element; let i = index"
+          formGroupName="{{ i }}"
+        >
+          <mat-checkbox
+            [checked]="element.active"
+            formControlName="active"
+          ></mat-checkbox>
+        </mat-cell>
+      </ng-container>
+      <!-- footer -->
+      <ng-container matColumnDef="save">
+        <mat-footer-cell *matFooterCellDef>
+          <div
+            fxLayout="row"
+            fxLayoutAlign="center"
+            *ngIf="
+              rateService.tableForm.get('rows').hasError('noEuroSetOnActive')
+            "
+          >
+            <mat-error
+              >*Attenzione se si attiva una tariffa è obbligatorio inserire un
+              importo in euro diverso da 0</mat-error
+            >
+          </div>
+          <div
+            fxLayout="row"
+            fxLayoutAlign="center"
+            *ngIf="
+              rateService.tableForm.get('rows').hasError('noActiveOnEuroSet')
+            "
+          >
+            <mat-error
+              >*Attenzione se si inserisce un importo in euro è obbligatorio
+              attivare la tariffa corrispondente</mat-error
+            >
+          </div>
+          <div
+            fxLayout="row"
+            fxLayoutAlign="center"
+            class="save-row"
+            *ngIf="rateService.tableForm.valid"
+          >
+            <button fxFlex="50" mat-raised-button color="primary">
+              {{ editMode ? 'Modifica' : 'Salva' }}
+            </button>
+          </div>
+        </mat-footer-cell>
+      </ng-container>
+      <mat-footer-row
+        *matFooterRowDef="['save']"
+        [ngClass]="{ hide: dataSource == null }"
+      ></mat-footer-row>
+    </mat-table>
+  </div>
+</form>

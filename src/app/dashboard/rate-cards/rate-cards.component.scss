@@ -1,0 +1,34 @@
+.table-container {
+    margin: 3rem auto;
+    width: 80%;
+  }
+  
+  .hide {
+    display: none;
+  }
+  
+  .save-row {
+    width: 100%;
+    padding: 1.5rem;
+  }
+  
+  .header-group {
+    font-size: 18px;
+    padding: 2rem 2rem 0 2rem;
+  }
+  
+  .euro-input {
+    width: 60px !important;
+  }
+  
+  .table-title {
+    padding: 2rem 2rem 0 2rem;
+  }
+  
+  @media only screen and (max-width: 600px) {
+    .table-container {
+      margin: 2rem auto;
+      width: 95%;
+    }
+  }
+  

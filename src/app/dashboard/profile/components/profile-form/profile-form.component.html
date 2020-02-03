@@ -1,0 +1,20 @@
+<app-form-dialog [headerText]="title">
+  <div class="icon-close" (click)="onDialogClose()">
+    <mat-icon>close</mat-icon>
+  </div>
+  <form [formGroup]="profileService.formDialog" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="{{data.record}}"
+        formControlName="record"
+      />
+    </mat-form-field>
+    <div fxFlexLayout="row" fxFlexAlign="center center">
+      <app-submit-button [disabled]="profileService.formDialog.invalid" color="primary">
+        Conferma
+      </app-submit-button>
+    </div>
+  </form>
+</app-form-dialog>
+

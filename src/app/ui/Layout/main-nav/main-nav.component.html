@@ -1,0 +1,79 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false"
+  >
+    <mat-toolbar><button mat-button class="menu-button" [routerLink]="['/dashboard', 'user', userId]">Menu</button></mat-toolbar>
+    <mat-nav-list>
+      <li *ngIf="!isAuthenticated">
+        <a
+          mat-list-item
+          [routerLink]="['/dashboard']"
+          routerLinkActive="router-link-active"
+          >DASHBOARD</a
+        >
+      </li>
+      <div *ngIf="isAuthenticated">
+        <li *ngFor="let link of sidenavLinks">
+          <a mat-list-item [routerLink]="link.url" routerLinkActive>{{
+            link.title | uppercase
+          }}</a>
+        </li>
+      </div>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" class="toolbar-container">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async"
+      >
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <a routerLink="/" class="brand"></a>
+      <span class="spacer"></span>
+      <li *ngIf="!isAuthenticated">
+        <button
+          type="link"
+          mat-button
+          class="right-link"
+          [routerLink]="['/login']"
+        >
+          AREA RISERVATA
+        </button>
+      </li>
+      <li *ngIf="isAuthenticated">
+        <button
+          mat-icon-button
+          [matMenuTriggerFor]="menu"
+          aria-label="menu"
+        >
+        <mat-icon>account_circle</mat-icon>
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="onProfileClick()">
+            <mat-icon>account_circle</mat-icon>
+            <span>Profilo</span>
+          </button>
+          <button mat-menu-item (click)="onLogout()">
+            <mat-icon>exit_to_app</mat-icon>
+            <span>Esci</span>
+          </button>
+        </mat-menu>
+      </li>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    <div class="main">
+      <ng-content></ng-content>
+    </div>
+    <app-footer></app-footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>

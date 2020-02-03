@@ -1,0 +1,17 @@
+<div class="dialog-container">
+  <div class="icon-close" (click)="onDialogClose()">
+    <mat-icon>close</mat-icon>
+  </div>
+
+  <div class="mat-typography">
+    <h2>{{data.message}}</h2>
+  </div>
+
+  <div flexLayout="row" fxLayoutAlign="space-between">
+    <button mat-raised-button color="warn" [mat-dialog-close]="false" >NO</button>
+    <button mat-raised-button color="accent" [mat-dialog-close]="true" >
+      SI
+    </button>
+  </div>
+</div>
+

@@ -1,0 +1,107 @@
+<app-feature-header title="Area Geografica"></app-feature-header>
+<div class="mat-typography">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        <h2>
+          Crea una Area Geografica che determina i punti di prelevamento dei
+          Passeggeri.
+        </h2>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        L’area Geografica di lavoro rappresenta il <span>Territorio</span> dove
+        caricherai i passeggeri.
+      </p>
+      <p>
+        Sono considerati validi anche i <span>Servizi</span> che hanno il punto
+        di <span>Caricamento</span> all’esterno dell’Area Geografica ma che
+        hanno la <span>Destinazione</span> all’interno dell’Area Geografica.
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>
+<div class="mat-typography action-container">
+  <div>
+    <h2>
+      Selezionare la Località al centro della tua Area Geografica di Lavoro e il
+      Raggio in Km.
+    </h2>
+  </div>
+  <form [formGroup]="geoService.form" (ngSubmit)="onSubmit()">
+    <div
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayoutAlign="start"
+      fxLayoutAlign.xs="center"
+      fxLayoutGap="60px"
+      fxLayoutGap.xs="0px"
+      class="form-container"
+    >
+      <div fxFlex="50">
+        <agm-map
+          [latitude]="latitude"
+          [longitude]="longitude"
+          [scrollwheel]="false"
+          [zoom]="zoom"
+          [disableDefaultUI]="false"
+        >
+          <agm-marker
+            [latitude]="latitude"
+            [longitude]="longitude"
+          ></agm-marker>
+          <agm-circle
+            [latitude]="latitude"
+            [longitude]="longitude"
+            [radius]="5000"
+            [fillColor]="'red'"
+          >
+          </agm-circle>
+        </agm-map>
+      </div>
+      <div fxFlex="50">
+        <div fxLayout="row" fxLayoutGap="20px" class="form-container">
+          <!-- for production.. <mat-google-maps-autocomplete
+            (onAutocompleteSelected)="onAutocompleteSelected($event)"
+            (onLocationSelected)="onLocationSelected($event)"
+          >
+          </mat-google-maps-autocomplete> -->
+          <mat-form-field>
+            <input matInput placeholder="Località" formControlName="city" />
+            <mat-error>Campo obbligatorio</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Raggio (in Km)"
+              formControlName="radius"
+              type="number"
+              min="0"
+              max="50"
+            />
+            <mat-error>Campo obbligatorio</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="action-button-row" fxLayout="row" fxLayoutGap="20px">
+          <app-raised-btn color="accent">
+            Aggiorna mappa
+          </app-raised-btn>
+
+          <app-raised-btn color="warn" (click)="onCancel()">
+            Annulla
+          </app-raised-btn>
+        </div>
+        <div>
+          <app-submit-button [disabled]="geoService.form.invalid" color="primary">
+            {{ editMode ? 'Modifica area' : 'Salva Area'}}
+          </app-submit-button>
+        </div>
+        <div *ngIf="error">
+          <mat-error>{{ error }}</mat-error>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

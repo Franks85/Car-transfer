@@ -1,0 +1,27 @@
+<div
+  fxLayout="row"
+  fxLayout.xs="column"
+  fxLayoutAlign="space-around"
+  fxLayoutAlign.xs="center"
+  fxLayoutGap.xs="20px"
+  class="action-container"
+>
+  <button
+    mat-raised-button
+    color="accent"
+    class="new-button"
+    (click)="onNewTableCreate()"
+  >
+    {{actBtnText}}
+  </button>
+  <mat-form-field>
+    <mat-select placeholder="Seleziona tariffario">
+      <mat-option *ngIf="!selectOptions.length">Non disponibile</mat-option>
+      <ng-container *ngFor="let opt of selectOptions">
+        <mat-option [value]="opt" (click)="onOptSelect(opt)">{{
+          opt
+        }}</mat-option>
+      </ng-container>
+    </mat-select>
+  </mat-form-field>
+</div>

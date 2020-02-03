@@ -1,0 +1,153 @@
+<app-feature-header title="Il tuo Profilo"></app-feature-header>
+<div>
+  <p>*Ricordati di cliccare su <span>Salva modifiche</span> per aggiornare il profilo</p>
+  <mat-accordion class="accordion-container">
+    <mat-expansion-panel
+      (opened)="panelOpenState = true"
+      (closed)="panelOpenState = false"
+      [expanded]="true"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          DATI PERSONALI
+        </mat-panel-title>
+        <mat-panel-description>
+          Modifica i tuoi dati
+          <mat-icon>account_circle</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+        <div *ngIf="userProfile$ | widthLoading | async as obs">
+          <div
+            *ngIf="obs.error"
+            fxLayout="row"
+            fxLayoutAlign="center"
+            class="error"
+          >
+            <mat-error
+              >Si è verificato un errore, riprova in pochi minuti!</mat-error
+            >
+          </div>
+          <div
+            *ngIf="obs.loading"
+            fxLayout="row"
+            fxLayoutAlign="center"
+            class="add-padding"
+          >
+            <app-spinner></app-spinner>
+          </div>
+          <div class="accordion-content" *ngIf="obs.value && !obs.loading">
+            <div
+              class="mat-typography"
+              fxLayout="row"
+              fxLayout.xs="column"
+              fxLayoutAlign="start center"
+              fxLayoutAlign.xs="start"
+              fxLayoutGap.xs="7px"
+            >
+              <span fxFlex="20" fxFlex.xs="33">Nome :</span>
+              <div fxFlex="20" fxFlex.xs="33">
+                {{ obs.value?.name }}
+              </div>
+              <button
+                fxFlex="20"
+                fxFlex.xs="33"
+                mat-icon-button
+                (click)="onChangeButtonClick('name', obs.value.name)"
+              >
+                Modifica <mat-icon>launch</mat-icon>
+              </button>
+            </div>
+            <mat-divider></mat-divider>
+            <div
+              class="mat-typography"
+              fxLayout="row"
+              fxLayout.xs="column"
+              fxLayoutAlign="start center"
+              fxLayoutAlign.xs="start"
+              fxLayoutGap.xs="7px"
+            >
+              <span fxFlex="20" fxFlex.xs="33">Cognome :</span>
+              <div fxFlex="20" fxFlex.xs="33">
+                {{ obs.value?.surname }}
+              </div>
+              <button
+                fxFlex="20"
+                fxFlex.xs="33"
+                mat-icon-button
+                (click)="onChangeButtonClick('surname', obs.value.surname)"
+              >
+                Modifica <mat-icon>launch</mat-icon>
+              </button>
+            </div>
+            <mat-divider></mat-divider>
+            <div
+              class="mat-typography"
+              fxLayout="row"
+              fxLayout.xs="column"
+              fxLayoutAlign="start center"
+              fxLayoutAlign.xs="start"
+              fxLayoutGap.xs="7px"
+            >
+              <span fxFlex="20" fxFlex.xs="33">Email :</span>
+              <div fxFlex="20" fxFlex.xs="33">{{ obs.value?.email }}</div>
+              <button
+                fxFlex="20"
+                fxFlex.xs="33"
+                mat-icon-button
+                (click)="onChangeButtonClick('email', obs.value.email)"
+              >
+                Modifica <mat-icon>launch</mat-icon>
+              </button>
+            </div>
+            <mat-divider></mat-divider>
+            <div
+              class="mat-typography"
+              fxLayout="row"
+              fxLayout.xs="column"
+              fxLayoutAlign="start center"
+              fxLayoutAlign.xs="start"
+              fxLayoutGap.xs="7px"
+            >
+              <span fxFlex="20" fxFlex.xs="33">Password :</span>
+              <div fxFlex="20" fxFlex.xs="33">{{ obs.value?.password }}</div>
+              <button
+                fxFlex="20"
+                fxFlex.xs="33"
+                mat-icon-button
+                (click)="onChangeButtonClick('password', obs.value.password)"
+              >
+                Modifica <mat-icon>launch</mat-icon>
+              </button>
+            </div>
+            <mat-divider></mat-divider>
+            <div
+              class="mat-typography"
+              fxLayout="row"
+              fxLayout.xs="column"
+              fxLayoutAlign="start center"
+              fxLayoutAlign.xs="start"
+              fxLayoutGap.xs="7px"
+            >
+              <span fxFlex="20" fxFlex.xs="33">Telefono :</span>
+              <div fxFlex="20" fxFlex.xs="33">{{ obs.value?.phone }}</div>
+              <button
+                fxFlex="20"
+                fxFlex.xs="33"
+                mat-icon-button
+                (click)="onChangeButtonClick('phone', obs.value.phone)"
+              >
+                Modifica <mat-icon>launch</mat-icon>
+              </button>
+            </div>
+            <mat-divider></mat-divider>
+          </div>
+        </div>
+
+      <mat-action-row>
+        <app-raised-btn color="primary" (click)="onSaveButtonclick()">
+          Salva modifiche
+        </app-raised-btn>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

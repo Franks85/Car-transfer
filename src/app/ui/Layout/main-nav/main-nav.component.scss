@@ -1,0 +1,72 @@
+@import "../../../../styles.scss";
+
+.main {
+  padding: 2rem;
+  min-height: 100vh;
+  @include sm {
+    padding: 1rem;
+}
+}
+
+.sidenav-container {
+  height: 100%;
+}
+
+.mat-toolbar.mat-primary {
+  z-index: 100 !important;
+}
+
+.sidenav {
+  width: 250px;
+  background-color: #2b3bac;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+  color: #fff;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  box-shadow: teal;
+  background-color: #d2b2d7;
+}
+
+.mat-list-base .mat-list-item {
+  color: #fff;
+  letter-spacing: .15rem;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.right-link {
+  display: inline-block;
+  margin: 0 15px;
+  border: 1px solid #fff;
+  text-decoration: none;
+}
+
+.brand {
+  height: 90%;
+  width: 10%;
+  background: url('https://i0.wp.com/www.autotaxienriconapoli.it/wp-content/uploads/2015/06/home_transfer_icon_big_3.png') no-repeat left/contain;
+}
+
+.active {
+  background-color: #6d5a7b;
+}
+
+.mat-list-base .mat-list-item {
+  color: #fff;
+  letter-spacing: .15rem;
+}
+
+.menu-button {
+  font-size: 1.4rem;
+}
+
+

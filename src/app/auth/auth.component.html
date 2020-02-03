@@ -1,0 +1,96 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+  <h1 class="mat-h1">{{ title }}</h1>
+  <div *ngIf="isLoading">
+    <app-spinner></app-spinner>
+  </div>
+  <mat-error>{{ error }}</mat-error>
+  <form
+    [formGroup]="authService.form"
+    (ngSubmit)="onSubmit()"
+    *ngIf="!isLoading"
+  >
+    <ng-container *ngIf="authType === 'register'">
+      <mat-form-field>
+        <input matInput placeholder="Nome" type="text" formControlName="name" />
+        <mat-error>Il nome è obbligatorio</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Cognome"
+          type="text"
+          formControlName="surname"
+        />
+        <mat-error>Il cognome è obbligatorio</mat-error>
+      </mat-form-field>
+    </ng-container>
+
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="email"
+        type="email"
+        formControlName="email"
+      />
+      <mat-error *ngIf="email.hasError('pattern')">Email non valida</mat-error>
+      <mat-error *ngIf="email.hasError('required')"
+        >Email obbligatoria</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="password"
+        type="password"
+        formControlName="password"
+      />
+      <mat-hint>La Password deve essere di almeno 6 caratteri</mat-hint>
+      <mat-error *ngIf="password.hasError('required')"
+        >La password è obbligatoria</mat-error
+      >
+      <mat-error *ngIf="password.invalid"
+        >La password deve contenere almeno 6 caratteri</mat-error
+      >
+    </mat-form-field>
+    <ng-container *ngIf="authType === 'register'">
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Telefono"
+          type="text"
+          formControlName="phone"
+        />
+        <mat-error *ngIf="phone.hasError('required')"
+          >Il numero di telefono è obbligatorio</mat-error
+        >
+        <mat-error *ngIf="phone.invalid"
+          >Il numero di telefono non è valido</mat-error
+        >
+      </mat-form-field>
+    </ng-container>
+
+    <app-submit-button
+      *ngIf="authType === 'register'"
+      [disabled]="!authService.form.valid"
+      >Signup</app-submit-button
+    >
+    <app-submit-button
+      *ngIf="authType === 'login'"
+      [disabled]="email.invalid || password.invalid"
+      >Login</app-submit-button
+    >
+    <p *ngIf="authType === 'login'">
+      Non hai ancora un account? Vai alla
+      <app-primary-button (click)="onSignupLinkClick()">
+        Signup</app-primary-button
+      >page
+    </p>
+    <p *ngIf="authType === 'register'">
+      Hai già un account? Vai alla
+      <app-primary-button (click)="onLoginLinkClick()">
+        Login</app-primary-button
+      >page
+    </p>
+  </form>
+</div>

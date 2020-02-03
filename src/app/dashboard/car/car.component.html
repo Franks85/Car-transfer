@@ -1,0 +1,7 @@
+<app-feature-header title="La tua auto"></app-feature-header>
+<app-car-detail-card
+  [car$]="car$"
+  (carAdd)="onCarAdd()"
+  (carDelete)="onCarDelete()"
+  (carUpdate)="onCarUpdate($event)"
+></app-car-detail-card>

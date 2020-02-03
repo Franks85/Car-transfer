@@ -1,0 +1,16 @@
+<div fxLayout="row" fxLayoutAlign="center center" class="footer-container">
+  <div fxFlex="40">
+    <mat-nav-list>
+      <a mat-list-item href="/" *ngFor="let link of links"> {{ link }} </a>
+    </mat-nav-list>
+  </div>
+  <div fxFlex="1px" class="divider"></div>
+  <div fxFlex >
+   <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="7px">
+    <div *ngFor="let icon of socialIcons">
+      <a mat-icon-button href="/" [matTooltip]="icon.tooltip" matTooltipPosition="above"><mat-icon svgIcon={{icon.name}}></mat-icon></a>
+    </div>
+   </div>
+   <div fxLayout="row" fxLayoutAlign="center center" ></div>
+  </div>
+</div>
