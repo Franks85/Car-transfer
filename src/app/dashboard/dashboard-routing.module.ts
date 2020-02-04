@@ -1,3 +1,4 @@
+import { DayScheduleComponent } from './day-schedule/day-schedule.component';
 import { RateCardsComponent } from './rate-cards/rate-cards.component';
 import { CarComponent } from './car/car.component';
 import { GeoAreaComponent } from './geo-area/geo-area.component';
@@ -21,7 +22,8 @@ const routes: Routes = [
       {path: 'profile', component: ProfileComponent},
       {path: 'geo', component: GeoAreaComponent},
       {path: 'car', component: CarComponent},
-      {path: 'rates', component: RateCardsComponent}
+      {path: 'rates', component: RateCardsComponent},
+      {path: 'day', component: DayScheduleComponent}
     ]
   }
 ];

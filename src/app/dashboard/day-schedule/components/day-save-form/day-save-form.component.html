@@ -1,0 +1,28 @@
+<app-form-dialog [headerText]="'Inserisci il nome per la giornata creata'">
+    <div class="icon-close" (click)="onDialogClose()">
+      <mat-icon>close</mat-icon>
+    </div>
+    <div>
+      <mat-error *ngIf="error">{{ error }}</mat-error>
+    </div>
+    <form [formGroup]="dayService.saveForm" (ngSubmit)="onSubmit()">
+      <mat-grid-list cols="1" rowHeight="150px">
+        <mat-grid-tile>
+          <div class="controls-container">
+            <mat-form-field>
+              <input matInput placeholder="Nome*" formControlName="name" />
+              <mat-error>Campo obbligatorio</mat-error>
+            </mat-form-field>
+            <div>
+              <app-submit-button
+                color="primary"
+                [disabled]="dayService.saveForm.invalid"
+              >
+                Salva
+              </app-submit-button>
+            </div>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </form>
+  </app-form-dialog>

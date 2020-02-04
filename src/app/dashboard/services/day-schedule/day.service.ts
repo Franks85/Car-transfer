@@ -1,5 +1,5 @@
 import { BehaviorSubject } from 'rxjs';
-import { RateTable, Rate } from './../../models/rates.model';
+import { Day, DayTable } from './../../models/day-schedule.model';
 import {
   FormGroup,
   FormArray,
@@ -12,9 +12,9 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class RateService {
+export class DayService {
   tableForm: FormGroup;
-  rateNameList = new BehaviorSubject<string[]>([]);
+  dayNameList = new BehaviorSubject<string[]>([]);
   constructor(private fb: FormBuilder) {}
 
   saveForm: FormGroup = new FormGroup({
@@ -29,31 +29,30 @@ export class RateService {
 
   validatorMatchOnActiveStatus(group: FormGroup): any {
     if (group) {
-      group.value.rows.forEach((row: Rate) => {
-        if (row.active && row.euro === 0) {
-          this.tableForm.get('rows').setErrors({ noEuroSetOnActive: true });
+      group.value.rows.forEach((row: Day) => {
+        if (row.active && !row.tarif.length) {
+          this.tableForm.get('rows').setErrors({ noTarifSelectedOnActive: true });
         }
-        if (!row.active && row.euro !== 0) {
-          this.tableForm.get('rows').setErrors({ noActiveOnEuroSet: true });
+        if (!row.active && row.tarif.length) {
+          this.tableForm.get('rows').setErrors({ noActiveOnTarifSelect: true });
         }
       });
     }
     return null;
   }
 
-  setTableFormRows(data: Rate[]) {
+  setTableFormRows(data: Day[]) {
     const rowsCtrl = this.tableForm.get('rows') as FormArray;
     data.forEach(row => {
       rowsCtrl.push(this.createTableFormGroup(row));
     });
   }
 
-  createTableFormGroup(row: Rate): FormGroup {
-    return this.fb.group({ euro: [row.euro], active: [row.active] });
+  createTableFormGroup(row: Day): FormGroup {
+    return this.fb.group({ active: [row.active], tarif: [row.tarif] });
   }
 
-  rateToDbCreate(data: Rate[], name: string): RateTable {
+  dayToDbCreate(data: Day[], name: string): DayTable {
     return { name, value: data };
   }
 }
-

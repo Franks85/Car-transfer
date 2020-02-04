@@ -23,6 +23,10 @@ import { CarFormComponent } from './car/components/car-form/car-form.component';
 import { CarDetailCardComponent } from './car/components/car-detail-card/car-detail-card.component';
 import { RateCardsComponent } from './rate-cards/rate-cards.component';
 import { RateSaveFormComponent } from './rate-cards/components/rate-save-form/rate-save-form.component';
+import { DayScheduleComponent } from './day-schedule/day-schedule.component';
+import { DaySaveFormComponent } from './day-schedule/components/day-save-form/day-save-form.component';
+import { MainFeatureComponent } from './main-feature/main-feature.component';
+import { DateSelectDialogComponent } from './main-feature/components/date-select-dialog/date-select-dialog.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +39,11 @@ import { RateSaveFormComponent } from './rate-cards/components/rate-save-form/ra
     CarFormComponent,
     CarDetailCardComponent,
     RateCardsComponent,
-    RateSaveFormComponent
+    RateSaveFormComponent,
+    DayScheduleComponent,
+    DaySaveFormComponent,
+    MainFeatureComponent,
+    DateSelectDialogComponent
   ],
   imports: [
     CommonModule,
@@ -54,7 +62,8 @@ import { RateSaveFormComponent } from './rate-cards/components/rate-save-form/ra
     ConfirmDialogComponent,
     ProfileFormComponent,
     CarFormComponent,
-    RateSaveFormComponent
+    RateSaveFormComponent,
+    DaySaveFormComponent
   ],
   providers: [
     { provide: MatDialogRef },

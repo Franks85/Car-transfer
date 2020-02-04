@@ -1,6 +1,6 @@
 import { Observable, throwError } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireDatabase, QueryFn } from '@angular/fire/database';
 import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
@@ -58,10 +58,10 @@ export class ApiService {
       });
   }
 
-  getList<T>(endpoint: string, userId: string): Observable<T[]> {
+  getList<T>(endpoint: string, userId: string, query?: QueryFn): Observable<T[]> {
     const url = this.getUrl(endpoint, userId);
     return this.db
-      .list<T>(url)
+      .list<T>(url, query)
       .snapshotChanges()
       .pipe(
         map((changes): T[] =>

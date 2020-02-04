@@ -1,0 +1,48 @@
+span {
+    color: gray;
+    letter-spacing: .08rem;
+  }
+  
+  .tableContainer {
+    margin: 3rem auto;
+    width: 90%;
+    height: 75vh;
+    overflow: auto;
+  }
+  
+  .emptyTable {
+    width: 90%;
+    margin: 3rem auto;
+  }
+  
+  .table-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  
+  .header-group {
+    font-size: 18px;
+    padding: 2rem 2rem 0 2rem;
+  }
+  
+  .hide {
+    display: none;
+  }
+  
+  .table-title {
+    padding: 2rem 2rem 0 2rem;
+  }
+  
+  .save-row {
+    width: 100%;
+    padding: 1.5rem;
+  }
+  
+  @media only screen and (max-width: 600px) {
+    .table-container {
+      margin: 1rem auto;
+      width: 95%;
+    }
+  }
+  

@@ -1,0 +1,149 @@
+<app-feature-header title="Giornata"></app-feature-header>
+<div
+  class="mat-typography"
+  fxLayout="row"
+  fxLayoutAlign="center"
+  *ngIf="noRateSaved"
+>
+  <h3>
+    *Non ci sono tariffari salvati, vai alla sezione
+    <app-primary-button (click)="onTariffPageClick()">
+      Tariffari</app-primary-button
+    >per crearne uno!
+  </h3>
+</div>
+<app-feature-actions
+  [selectOptions]="dayService.dayNameList.value"
+  (newTableCreate)="onDayScheduleCreate()"
+  (optSelected)="onDaySelect($event)"
+  [selectPlaceholder]="'Seleziona una giornata'"
+  [actBtnText]="'Crea una giornata'"
+></app-feature-actions>
+
+<form [formGroup]="dayService.tableForm" (ngSubmit)="onDaySave()">
+  <!-- table -->
+  <div
+    class="mat-elevation-z8"
+    [ngClass]="{
+      tableContainer: dataSource != null,
+      emptyTable: dataSource == null
+    }"
+  >
+    <mat-table [dataSource]="dataSource" formArrayName="rows">
+      <ng-container *matHeaderRowDef="displayedColumns">
+        <div
+          class="mat-header-row header-group-row"
+          [ngClass]="{ hide: dataSource != null }"
+        >
+          <div class="mat-header-cell header-group">
+            Crea o seleziona una Giornata salvata
+          </div>
+        </div>
+        <div class="mat-typography table-title">
+          <h2>{{ tableName }}</h2>
+        </div>
+        <mat-header-row class="table-header"></mat-header-row>
+      </ng-container>
+
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      <!-- Hour Column -->
+      <ng-container matColumnDef="hour">
+        <mat-header-cell *matHeaderCellDef>Orario</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.hour }} </mat-cell>
+      </ng-container>
+      <!-- Active Column -->
+      <ng-container matColumnDef="active">
+        <mat-header-cell *matHeaderCellDef>Attivo / Non Attivo</mat-header-cell>
+        <mat-cell
+          *matCellDef="let element; let i = index"
+          formGroupName="{{ i }}"
+        >
+          <mat-checkbox
+            [checked]="element.active"
+            formControlName="active"
+          ></mat-checkbox>
+        </mat-cell>
+      </ng-container>
+      <!-- Tarif Column -->
+      <ng-container matColumnDef="tarif">
+        <mat-header-cell *matHeaderCellDef>Tariffario</mat-header-cell>
+        <mat-cell
+          *matCellDef="let element; let i = index"
+          formGroupName="{{ i }}"
+          ><mat-form-field>
+            <mat-select
+              placeholder="Seleziona Tariffario"
+              formControlName="tarif"
+            >
+              <mat-option>{{
+                rateNames.length ? 'none' : 'Non ci sono Tariffari salvati'
+              }}</mat-option>
+              <ng-container *ngFor="let rate of rateNames">
+                <mat-option value="{{ rate }}">{{ rate }}</mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field></mat-cell
+        >
+      </ng-container>
+
+      <!-- footer -->
+      <ng-container matColumnDef="save">
+        <mat-footer-cell *matFooterCellDef>
+          <div
+            fxLayout="row"
+            fxLayoutAlign="center"
+            *ngIf="
+              dayService.tableForm
+                .get('rows')
+                .hasError('noTarifSelectedOnActive')
+            "
+          >
+            <mat-error
+              >*Attenzione se si attiva un orario è obbligatorio associare un
+              tariffario</mat-error
+            >
+          </div>
+          <div
+            fxLayout="row"
+            fxLayoutAlign="center"
+            *ngIf="
+              dayService.tableForm.get('rows').hasError('noActiveOnTarifSelect')
+            "
+          >
+            <mat-error
+              >*Attenzione se si seleziona un tariffario è obbligatorio attivare
+              l'orario corrispondente</mat-error
+            >
+          </div>
+          <div
+            fxLayout="row"
+            fxLayoutAlign="center"
+            class="save-row"
+            *ngIf="dayService.tableForm.valid"
+          >
+            <button
+              *ngIf="!editMode"
+              fxFlex="50"
+              mat-raised-button
+              color="primary"
+            >
+              Salva
+            </button>
+            <button
+              *ngIf="editMode"
+              fxFlex="50"
+              mat-raised-button
+              color="primary"
+            >
+              Modifica
+            </button>
+          </div>
+        </mat-footer-cell>
+      </ng-container>
+      <mat-footer-row
+        *matFooterRowDef="['save']"
+        [ngClass]="{ hide: dataSource == null }"
+      ></mat-footer-row>
+    </mat-table>
+  </div>
+</form>

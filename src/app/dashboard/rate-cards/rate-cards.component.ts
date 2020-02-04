@@ -22,7 +22,6 @@ export class RateCardsComponent implements OnInit, OnDestroy {
   error: string = null;
   tableName = '';
   editMode = false;
-  rateNames = [];
   rateListSub$: Subscription;
   rateList: RateTable[];
   displayedColumns: string[] = ['km', 'euro', 'active'];
@@ -46,7 +45,7 @@ export class RateCardsComponent implements OnInit, OnDestroy {
           if (rate.length) {
             this.rateList = rate;
             const rateNameList = rate.map(t => t.name);
-            this.rateNames = rateNameList;
+            this.rateService.rateNameList.next(rateNameList);
           }
         },
         err => {
@@ -120,13 +119,14 @@ export class RateCardsComponent implements OnInit, OnDestroy {
             }
           });
       } else {
+        const rateNames = this.rateService.rateNameList.value;
         this.dialog.open(RateSaveFormComponent, {
           disableClose: true,
           autoFocus: true,
           width: '400px',
           data: {
             newRate: newRateArray,
-            names: this.rateNames,
+            names: rateNames,
             id: this.userId
           }
         });

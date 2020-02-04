@@ -1,6 +1,6 @@
 <app-feature-header title="Tariffari"></app-feature-header>
 <app-feature-actions
-  [selectOptions]="rateNames"
+  [selectOptions]="rateService.rateNameList.value"
   (newTableCreate)="onNewTarifCreate()"
   (optSelected)="onRateSelect($event)"
   [selectPlaceholder]="'Seleziona un tariffario'"

@@ -15,7 +15,7 @@
     {{actBtnText}}
   </button>
   <mat-form-field>
-    <mat-select placeholder="Seleziona tariffario">
+    <mat-select placeholder="{{selectPlaceholder}}">
       <mat-option *ngIf="!selectOptions.length">Non disponibile</mat-option>
       <ng-container *ngFor="let opt of selectOptions">
         <mat-option [value]="opt" (click)="onOptSelect(opt)">{{
