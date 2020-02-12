@@ -63,7 +63,8 @@ import { DateSelectDialogComponent } from './main-feature/components/date-select
     ProfileFormComponent,
     CarFormComponent,
     RateSaveFormComponent,
-    DaySaveFormComponent
+    DaySaveFormComponent,
+    DateSelectDialogComponent
   ],
   providers: [
     { provide: MatDialogRef },

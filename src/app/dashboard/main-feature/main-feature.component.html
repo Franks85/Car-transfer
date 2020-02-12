@@ -1,1 +1,128 @@
-<p>main-feature works!</p>
+<app-feature-header title="Dashboard"></app-feature-header>
+<div
+  class="mat-typography header-container"
+  fxLayout="row"
+  fxLayoutAlign="center"
+>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        <h2>
+          Seleziona le giornate dal calendario per renderle disponibili alla
+          vendita
+        </h2>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        Se non l'hai ancora fatto visita le sezioni
+        <app-feature-nav-btn
+          [btnText]="'TARIFFARI'"
+          [feature]="'rates'"
+          [userId]="userId"
+          [color]="'warn'"
+        >
+        </app-feature-nav-btn>
+        e
+        <app-feature-nav-btn
+          [btnText]="'GIORNATE'"
+          [feature]="'day'"
+          [userId]="userId"
+          [color]="'warn'"
+        >
+        </app-feature-nav-btn>
+        per inserirle velocemente nel calendario!
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>
+<ng-template #loading>
+  <div fxLayout="row" fxLayoutAlign="center" class="add-padding">
+    <app-spinner></app-spinner>
+  </div>
+</ng-template>
+<ng-container *ngIf="userValues$ | async as values; else loading">
+  <div class="mat-typography text-center"><h2>Dati Inseriti</h2></div>
+  <div
+    fxLayout="row"
+    fxLayout.xs="column"
+    fxLayoutAlign="center center"
+    fxLayoutGap="20px"
+  >
+    <div fxFlex="30%" fxFlex.xs="90%">
+      <div
+        class="mat-h3"
+        fxLayout.xs="row"
+        fxFlex.xs="100%"
+        fxLayoutGap.xs="25px"
+      >
+        <div *ngIf="values.geoArea">
+          <app-section-header [title]="'AREA GEOGRAFICA'" [textColor]="'primary'"></app-section-header>
+          <p>
+            <span class="primary">Località: </span>{{ values.geoArea?.city }}
+          </p>
+          <p>
+            <span class="primary">Raggio Area: </span
+            >{{ values.geoArea?.radius }} km
+          </p>
+          <app-feature-nav-btn
+            [btnText]="'MODIFICA AREA'"
+            [feature]="'geo'"
+            [userId]="userId"
+          >
+          </app-feature-nav-btn>
+        </div>
+        <div *ngIf="!values.geoArea">
+          <p>Non hai impostato un'area geografica</p>
+          <app-feature-nav-btn
+            [btnText]="'INSERISCI AREA GEOGRAFICA'"
+            [feature]="'geo'"
+            [userId]="userId"
+          >
+          </app-feature-nav-btn>
+        </div>
+        <div class="spacer"></div>
+        <div *ngIf="values.car">
+          <app-section-header [textColor]="'secondary'" [title]="'LA TUA AUTO'"
+            >Auto</app-section-header
+          >
+          <p>
+            <span class="secondary">Modello: </span>{{ values.car?.casa }} /
+            {{ values.car?.modello }}
+          </p>
+          <p><span class="secondary">Targa: </span>{{ values.car?.targa }}</p>
+          <app-feature-nav-btn
+            [btnText]="'MODIFICA AUTO'"
+            [feature]="'car'"
+            [userId]="userId"
+            [color]="'accent'"
+          >
+          </app-feature-nav-btn>
+        </div>
+        <div *ngIf="!values.car">
+          <p>Non hai salvato la tua auto</p>
+          <app-feature-nav-btn
+            [btnText]="'INSERISCI AUTO'"
+            [feature]="'car'"
+            [userId]="userId"
+            [color]="'accent'"
+          >
+          </app-feature-nav-btn>
+        </div>
+      </div>
+    </div>
+
+    <div fxFlex="50%" fxFlex.xs="90%" fxFlexAlign="center">
+      <div class="calendar-wrapper">
+        <app-calendar
+          #myCalendar
+          (dateSelected)="dateSelected($event, values.dayNames)"
+        >
+        </app-calendar>
+      </div>
+    </div>
+    <div fxFlex="20%" fxFlex.xs="90%" fxFlexAlign="center">
+      <app-legend></app-legend>
+    </div>
+  </div>
+</ng-container>

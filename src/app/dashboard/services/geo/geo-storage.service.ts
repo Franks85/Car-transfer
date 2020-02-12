@@ -1,7 +1,7 @@
+import { Observable } from 'rxjs';
 import { ApiService } from './../../../core/services/api.service';
 import { Injectable } from '@angular/core';
 import { GeoService } from './geo.service';
-import { shareReplay, tap } from 'rxjs/operators';
 import { GeoArea } from '../../models/geo.model';
 
 @Injectable({
@@ -9,23 +9,13 @@ import { GeoArea } from '../../models/geo.model';
 })
 export class GeoStorageService {
   svcEndpoint = 'geo';
-  constructor(private apiSvc: ApiService, private geoService: GeoService) {}
+  constructor(private apiSvc: ApiService) {}
 
-  fetchArea(userId: string) {
-    if (this.geoService.geoAreaChanged.value) {
-      return this.geoService.getArea();
-    } else {
-      return this.apiSvc.getOne(this.svcEndpoint, userId).pipe(
-        tap((area: GeoArea) => {
-          this.geoService.setArea(area);
-        })
-      );
-    }
+  fetchArea(userId: string): Observable<GeoArea> {
+    return this.apiSvc.getOne(this.svcEndpoint, userId);
   }
 
   saveArea(item: GeoArea, userId: string) {
-    return this.apiSvc.saveOne(this.svcEndpoint, item, userId).then(() => {
-      this.geoService.setArea(item);
-    });
+    return this.apiSvc.saveOne(this.svcEndpoint, item, userId);
   }
 }

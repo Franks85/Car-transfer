@@ -1,3 +1,4 @@
+import { MainFeatureComponent } from './main-feature/main-feature.component';
 import { DayScheduleComponent } from './day-schedule/day-schedule.component';
 import { RateCardsComponent } from './rate-cards/rate-cards.component';
 import { CarComponent } from './car/car.component';
@@ -23,7 +24,8 @@ const routes: Routes = [
       {path: 'geo', component: GeoAreaComponent},
       {path: 'car', component: CarComponent},
       {path: 'rates', component: RateCardsComponent},
-      {path: 'day', component: DayScheduleComponent}
+      {path: 'day', component: DayScheduleComponent},
+      {path: 'main', component: MainFeatureComponent}
     ]
   }
 ];

@@ -33,6 +33,9 @@ import { FormDialogComponent } from './components/form-dialog/form-dialog.compon
 import { RaisedBtnComponent } from './components/raised-btn/raised-btn.component';
 import { FeatureActionsComponent } from './components/feature-actions/feature-actions.component';
 import { ErrorMsgComponent } from './components/error-msg/error-msg.component';
+import { FeatureNavBtnComponent } from './components/feature-nav-btn/feature-nav-btn.component';
+import { LegendComponent } from './components/legend/legend.component';
+import { SectionHeaderComponent } from './components/section-header/section-header.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +49,10 @@ import { ErrorMsgComponent } from './components/error-msg/error-msg.component';
     FormDialogComponent,
     RaisedBtnComponent,
     FeatureActionsComponent,
-    ErrorMsgComponent
+    ErrorMsgComponent,
+    FeatureNavBtnComponent,
+    LegendComponent,
+    SectionHeaderComponent
   ],
   imports: [
     CommonModule,
@@ -103,7 +109,10 @@ import { ErrorMsgComponent } from './components/error-msg/error-msg.component';
     FormDialogComponent,
     RaisedBtnComponent,
     FeatureActionsComponent,
-    ErrorMsgComponent
+    ErrorMsgComponent,
+    FeatureNavBtnComponent,
+    LegendComponent,
+    SectionHeaderComponent
   ]
 })
 export class UiModule {

@@ -1,5 +1,4 @@
 import { GeoArea } from './../../models/geo.model';
-import { BehaviorSubject } from 'rxjs';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Injectable } from '@angular/core';
 
@@ -7,8 +6,6 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class GeoService {
-  private geoArea: GeoArea;
-  geoAreaChanged = new BehaviorSubject<GeoArea>(null);
   constructor() {}
 
   form: FormGroup = new FormGroup({
@@ -20,13 +17,5 @@ export class GeoService {
     this.form.setValue(values);
   }
 
-  setArea(geoArea: GeoArea) {
-    this.geoArea = geoArea;
-    this.geoAreaChanged.next({ ...this.geoArea });
-  }
-
-  getArea() {
-    return this.geoAreaChanged.asObservable();
-  }
 }
 

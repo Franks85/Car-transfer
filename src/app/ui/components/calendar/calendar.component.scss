@@ -4,12 +4,22 @@
   text-align: center;
 }
 
-.cell-color-start {
-  background: orange;
+.cell-color-avalaible {
+  background: #2cad42;
+ border-radius: 100%;
+ z-index: 10;
+}
+
+.cell-color-not-avalaible {
+  background: #f44336;
  border-radius: 100%;
  z-index: 10;
 }
 
 .mat-calendar-body-today:not(.mat-calendar-body-selected) {
   border: none;
+}
+
+.refresh-btn {
+  padding: 1rem 0;
 }

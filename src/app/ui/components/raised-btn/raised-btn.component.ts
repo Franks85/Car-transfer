@@ -6,7 +6,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./raised-btn.component.scss']
 })
 export class RaisedBtnComponent implements OnInit {
-  @Input() color: string;
+  @Input() color = 'primary';
   constructor() { }
 
   ngOnInit() {

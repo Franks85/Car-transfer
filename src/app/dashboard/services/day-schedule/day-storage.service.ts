@@ -17,7 +17,6 @@ export class DayStorageService {
   }
 
   saveDay(day: DayTable, userId: string) {
-    console.log(day)
     return this.apiService.addToList(this.serviceEndpoint, day, userId);
   }
 

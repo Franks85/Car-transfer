@@ -1,0 +1,32 @@
+.controls-container {
+    width: 100%;
+    padding: 5%;
+  }
+  
+.controls-container > * {
+    width: 100%;
+  }
+  
+.button-row button {
+    margin: 15px 20px 10px 0;
+  }
+  
+.icon-close {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    cursor: pointer;
+  }
+  
+.dialog-container {
+    position: relative;
+  }
+  
+.sell-checkBox {
+    margin: 1rem 0;
+  }
+  
+span {
+    color: #ff4081;
+  }
+  

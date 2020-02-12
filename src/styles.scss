@@ -25,12 +25,36 @@ a {
   cursor: pointer;
 }
 
+h3 {
+  letter-spacing: .1rem;
+}
+
 .fill-remaining-space {
   flex: 1 1 auto;
 }
 
 .add-padding {
   padding: 2rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.primary {
+  color: #3f51b5;
+}
+
+.secondary {
+  color: #ff4081;
+}
+
+.warn {
+  color: #f44336;
+}
+
+.spacer {
+  padding: 1rem 0;
 }
 
 /* notification */

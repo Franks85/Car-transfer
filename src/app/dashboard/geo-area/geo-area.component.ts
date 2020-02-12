@@ -54,7 +54,12 @@ export class GeoAreaComponent implements OnInit {
   onSubmit() {
     const geoArea: GeoArea = this.geoService.form.value;
     if (this.geoService.form.valid) {
-      const isEqual = objectsEqual(geoArea, this.area);
+      let isEqual: boolean;
+      if (this.area) {
+        isEqual = objectsEqual(geoArea, this.area);
+      } else {
+        isEqual = false;
+      }
       if (!isEqual) {
         this.geoStorageService.saveArea(geoArea, this.userId).then(
           () => {

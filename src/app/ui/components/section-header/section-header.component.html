@@ -1,0 +1,11 @@
+<div class="mat-typography text-center">
+  <h3
+    [ngClass]="{
+      'primary': textColor === 'primary',
+      'secondary': textColor === 'secondary',
+      'warn': textColor === 'warn'
+    }"
+  >
+    {{ title }}
+  </h3>
+</div>

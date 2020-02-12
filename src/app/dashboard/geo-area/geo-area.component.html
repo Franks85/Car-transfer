@@ -23,7 +23,7 @@
   </mat-card>
 </div>
 <div class="mat-typography action-container">
-  <div>
+  <div class="text-center add-padding">
     <h2>
       Selezionare la Località al centro della tua Area Geografica di Lavoro e il
       Raggio in Km.
@@ -36,7 +36,7 @@
       fxLayoutAlign="start"
       fxLayoutAlign.xs="center"
       fxLayoutGap="60px"
-      fxLayoutGap.xs="0px"
+      fxLayoutGap.xs="25px"
       class="form-container"
     >
       <div fxFlex="50">
@@ -61,7 +61,12 @@
         </agm-map>
       </div>
       <div fxFlex="50">
-        <div fxLayout="row" fxLayoutGap="20px" class="form-container">
+        <div
+          fxLayout="row"
+          fxLayoutGap="20px"
+          fxLayoutAlign.xs="center"
+          class="form-container"
+        >
           <!-- for production.. <mat-google-maps-autocomplete
             (onAutocompleteSelected)="onAutocompleteSelected($event)"
             (onLocationSelected)="onLocationSelected($event)"
@@ -84,7 +89,13 @@
           </mat-form-field>
         </div>
 
-        <div class="action-button-row" fxLayout="row" fxLayoutGap="20px">
+        <div
+          class="action-button-row"
+          fxLayout="row"
+          fxLayout.sm="column"
+          fxLayoutGap="20px"
+          fxLayoutAlign.xs="center"
+        >
           <app-raised-btn color="accent">
             Aggiorna mappa
           </app-raised-btn>
@@ -92,10 +103,11 @@
           <app-raised-btn color="warn" (click)="onCancel()">
             Annulla
           </app-raised-btn>
-        </div>
-        <div>
-          <app-submit-button [disabled]="geoService.form.invalid" color="primary">
-            {{ editMode ? 'Modifica area' : 'Salva Area'}}
+          <app-submit-button
+            [disabled]="geoService.form.invalid"
+            color="primary"
+          >
+            {{ editMode ? 'Modifica area' : 'Salva Area' }}
           </app-submit-button>
         </div>
         <div *ngIf="error">

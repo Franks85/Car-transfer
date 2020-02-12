@@ -1,1 +1,78 @@
-<p>date-select-dialog works!</p>
+<div class="dialog-container">
+  <div *ngIf="error">
+    <mat-error>{{ error }}</mat-error>
+  </div>
+  <div class="mat-typography">
+    <h2>Giorno: {{ dateSelected }}</h2>
+    <ng-container *ngIf="editMode; else av">
+      <h3>Modifica i dati inseriti</h3>
+    </ng-container>
+    <ng-template #av>
+      <h3>
+        Seleziona una <span>giornata</span> e rendila disponile alla vendita
+      </h3>
+    </ng-template>
+    <ng-container *ngIf="!data.daysList.length">
+      <h3>
+        *Nessuna giornata salvata! Vai alla sezione
+        <app-feature-nav-btn
+          [btnText]="'GIORNATE'"
+          [feature]="'day'"
+          [userId]="data.id"
+          [color]="'warn'"
+          (click)="onDialogClose()"
+        >
+        </app-feature-nav-btn>
+      </h3>
+    </ng-container>
+  </div>
+  <div class="icon-close" (click)="onDialogClose()">
+    <mat-icon>close</mat-icon>
+  </div>
+
+  <ng-container *ngIf="data.daysList as days">
+    <form
+      [formGroup]="featureService.form"
+      (ngSubmit)="onSubmit()"
+      *ngIf="days.length"
+    >
+      <mat-grid-list cols="1" rowHeight="200px">
+        <mat-grid-tile>
+          <div class="controls-container">
+            <mat-form-field>
+              <mat-select
+                placeholder="Giornata-Orari*"
+                formControlName="selectedDay"
+              >
+                <ng-container *ngFor="let day of days">
+                  <mat-option [value]="day">{{ day }}</mat-option>
+                </ng-container>
+              </mat-select>
+              <mat-error>Campo obbligatorio</mat-error>
+            </mat-form-field>
+
+            <div class="sell-checkBox">
+              <mat-checkbox formControlName="availableForSale" [checked]="false"
+                >Disponibile alla vendita</mat-checkbox
+              >
+            </div>
+
+            <div class="button-row">
+              <button mat-raised-button color="accent" (click)="onCancel()">
+                Cancella
+              </button>
+              <button
+                mat-raised-button
+                color="primary"
+                type="submit"
+                [disabled]="featureService.form.invalid"
+              >
+                Conferma
+              </button>
+            </div>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </form>
+  </ng-container>
+</div>

@@ -5,8 +5,13 @@
     (selectedChange)="dateChanged()"
     [minDate]="minDate"
     [maxDate]="maxDate"
-    [dateClass]="dateClass"
+    [dateClass]="dateClass()"
   >
   </mat-calendar>
+  <div class="refresh-btn">
+    <app-raised-btn (click)="onCalendarRefresh()">
+      Aggiorna Calendario
+    </app-raised-btn>
+  </div>
 </div>
 
