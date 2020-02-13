@@ -1,1 +1,21 @@
-<p>services-section works!</p>
+<div
+  fxLayout="row"
+  fxLayout.xs="column"
+  fxLayoutAlign="center center"
+  fxLayoutGap="25px"
+>
+  <ng-container *ngFor="let info of cardInfoList">
+    <div fxFlex="33" fxFlex.xs="80" class="card-container">
+      <div
+        class="card-img"
+        [ngStyle]="{
+          background: 'url(' + info.imgRef + ') no-repeat center/contain'
+        }"
+      ></div>
+      <p class="text-center">
+        {{ info.desc }}
+      </p>
+      <div class="under-line"></div>
+    </div>
+  </ng-container>
+</div>

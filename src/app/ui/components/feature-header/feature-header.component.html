@@ -1,5 +1,12 @@
+<div
+  class="primary back-dashboard"
+  [ngStyle.lt-sm]="{ display: 'none' }"
+  [ngStyle]="{ display: hideBackBtn ? 'none' : '' }"
+>
+  <button mat-button (click)="onBackClick()"><mat-icon>arrow_back_ios</mat-icon>Dashboard</button>
+</div>
 <div fxLayout="row" fxLayoutAlign="center center" class="feature-header">
-  <button mat-raised-button color="primary">
+  <button mat-raised-button color="primary" class="title">
     {{ title | uppercase }}
   </button>
 </div>
