@@ -1,4 +1,3 @@
-import { AuthService } from './../core/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -10,14 +9,11 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
   title = 'Auto transfer';
   subTitle = 'Noleggio auto con conducente';
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(private router: Router) {}
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   onCallToAction() {
-    this.router.navigate(['dashboard', ])
+    this.router.navigate(['dashboard']);
   }
-
 }

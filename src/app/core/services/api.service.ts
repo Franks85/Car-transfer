@@ -28,7 +28,7 @@ export class ApiService {
       .pipe(catchError(this.handleObsError));
   }
 
-  saveOne<T>(endpoint: string, item: T, userId?: string) {
+  saveOne<T>(endpoint: string, item: T, userId?: string): Promise<void> {
     const url = this.getUrl(endpoint, userId);
     return this.db
       .object<T>(url)
@@ -38,7 +38,7 @@ export class ApiService {
       });
   }
 
-  updateOne<T>(endpoint: string, item: T, userId?: string) {
+  updateOne<T>(endpoint: string, item: T, userId?: string): Promise<void> {
     const url = this.getUrl(endpoint, userId);
     return this.db
       .object<T>(url)
@@ -48,7 +48,7 @@ export class ApiService {
       });
   }
 
-  deleteOne<T>(endpoint: string, userId?: string) {
+  deleteOne<T>(endpoint: string, userId?: string): Promise<void> {
     const url = this.getUrl(endpoint, userId);
     return this.db
       .object<T>(url)

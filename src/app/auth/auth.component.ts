@@ -63,7 +63,7 @@ export class AuthComponent implements OnInit {
     }
     authObs
       .subscribe(
-        data => {
+        () => {
           this.isLoading = false;
         },
         errMsg => {
